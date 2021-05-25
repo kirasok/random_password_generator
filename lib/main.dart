@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -97,6 +99,22 @@ class PasswordPage extends StatefulWidget {
 }
 
 class _PasswordPageState extends State<PasswordPage> {
+  double _currentPasswordLength = 8;
+  bool isIncludeLowercase = true;
+  bool isIncludeUppercase = true;
+  bool isIncludeNumbers = true;
+  bool isIncludeSymbols = true;
+  bool isExcludeSimilar = false;
+  bool isExcludeAmbiguous = false;
+  String password = "";
+  Color colorOfPasswordBackground = Colors.transparent;
+
+  String _generatePassword() {
+    // TODO: generate password
+    colorOfPasswordBackground = Colors.grey.shade300;
+    return "a" * _currentPasswordLength.toInt();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -107,6 +125,99 @@ class _PasswordPageState extends State<PasswordPage> {
               Navigator.of(context).pop();
             },
           ),
+        ),
+        body: ListView(
+          children: [
+            // TODO: make slider be log2
+            Slider(
+              value: _currentPasswordLength,
+              min: 4,
+              max: 256,
+              divisions: 252,
+              label: _currentPasswordLength.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _currentPasswordLength = value;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text("Include Lowercase Characters"),
+              value: isIncludeLowercase,
+              onChanged: (bool a) {
+                setState(() {
+                  isIncludeLowercase = a;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text("Include Uppercase Characters"),
+              value: isIncludeUppercase,
+              onChanged: (bool a) {
+                setState(() {
+                  isIncludeUppercase = a;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text("Include Numbers"),
+              value: isIncludeNumbers,
+              onChanged: (bool a) {
+                setState(() {
+                  isIncludeNumbers = a;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text("Include Symbols"),
+              value: isIncludeSymbols,
+              onChanged: (bool a) {
+                setState(() {
+                  isIncludeSymbols = a;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text("Exclude Similar Characters"),
+              value: isExcludeSimilar,
+              onChanged: (bool a) {
+                setState(() {
+                  isExcludeSimilar = a;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text("Exclude Ambiguous Characters"),
+              value: isExcludeAmbiguous,
+              onChanged: (bool a) {
+                setState(() {
+                  isExcludeAmbiguous = a;
+                });
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  password = _generatePassword();
+                });
+              },
+              style: ElevatedButton.styleFrom(textStyle: DefaultTextStyle.of(context).style.apply(
+                fontSizeFactor: 0.5,
+              )),
+              child: Text("Generate Password"),
+            ),
+            Container(
+              margin: const EdgeInsets.all(16),
+              color: colorOfPasswordBackground,
+              child: Text(password,
+                  softWrap: true,
+                  textAlign: TextAlign.justify,
+                  style: DefaultTextStyle.of(context).style.apply(
+                      color: Colors.black,
+                      fontSizeFactor: 0.35,
+                      fontFeatures: [FontFeature.tabularFigures()])),
+            ),
+          ],
         ),
       );
 }
