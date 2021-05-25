@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  var items = [
+  var _items = [
     Item("Password", Icons.vpn_key),
     Item("Name", Icons.person),
     Item("Nickname", Icons.error), // TODO: add icon
   ];
-  items.sort((a, b) => a.title.compareTo(b.title));
+  _items.sort((a, b) => a.title.compareTo(b.title));
 
-  runApp(MyApp(items));
+  runApp(MyApp(_items));
 }
 
 class Item {
@@ -19,9 +19,9 @@ class Item {
 }
 
 class MyApp extends StatelessWidget {
-  final List items;
+  final List _items;
 
-  MyApp(this.items);
+  MyApp(this._items);
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +33,27 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Random Values Generator"),
         ),
-        body: ValuesList(items),
+        body: ValuesList(_items),
       ),
     );
   }
 }
 
 class ValuesList extends StatefulWidget {
-  final List items;
+  final List _items;
 
-  const ValuesList(this.items, {Key key}) : super(key: key);
+  const ValuesList(this._items, {Key key}) : super(key: key);
 
   @override
-  _ValuesListState createState() => _ValuesListState(items);
+  _ValuesListState createState() => _ValuesListState(_items);
 }
 
 class _ValuesListState extends State<ValuesList> {
 
-  final List items;
-  _ValuesListState(this.items);
+  final List _items;
+  _ValuesListState(this._items);
 
-  Widget buildRow(Item item) => ListTile(
+  Widget _buildRow(Item item) => ListTile(
     title: Text(item.title),
     trailing: Icon(item.icon),
   );
@@ -62,11 +62,11 @@ class _ValuesListState extends State<ValuesList> {
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: EdgeInsets.all(16.0),
-      itemCount: items.length + 2,
+      itemCount: _items.length + 2,
       itemBuilder: (context, i) {
         if (i.isOdd) return Divider();
         final index = i ~/ 2;
-        return buildRow(items[index]);
+        return _buildRow(_items[index]);
       },
     );
   }
