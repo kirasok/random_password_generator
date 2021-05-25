@@ -398,7 +398,13 @@ class _PasswordPageState extends State<PasswordPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: Image.asset("images/clipboard_arrow_down.xml"),
+          // TODO: fix no image
+          child: Image.asset(
+            "images/clipboard_arrow_down.png",
+            width: 48,
+            height: 48,
+            fit: BoxFit.cover,
+          ),
           onPressed: () => Clipboard.setData(ClipboardData(text: password)),
         ),
       );
