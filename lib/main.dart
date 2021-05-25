@@ -49,32 +49,30 @@ class ValuesList extends StatefulWidget {
 }
 
 class _ValuesListState extends State<ValuesList> {
-
   final List _items;
+
   _ValuesListState(this._items);
 
   Widget _buildRow(Item item) => ListTile(
-    title: Text(item.title),
-    trailing: Icon(item.icon),
-    onTap: () {
-      switch(item.title){
-        case "Password":
-          _navigateTo(PasswordPage());
-          break;
-        case "Name":
-          _navigateTo(NamePage());
-          break;
-        case "Nickname":
-          _navigateTo(NicknamePage());
-          break;
-      }
-    },
-  );
+        title: Text(item.title),
+        trailing: Icon(item.icon),
+        onTap: () {
+          switch (item.title) {
+            case "Password":
+              _navigateTo(PasswordPage());
+              break;
+            case "Name":
+              _navigateTo(NamePage());
+              break;
+            case "Nickname":
+              _navigateTo(NicknamePage());
+              break;
+          }
+        },
+      );
 
   void _navigateTo(Widget to) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => to
-    ));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => to));
   }
 
   @override
@@ -100,9 +98,17 @@ class PasswordPage extends StatefulWidget {
 
 class _PasswordPageState extends State<PasswordPage> {
   @override
-  Widget build(BuildContext context) {
-    return Container(child: Center(child: Text("Passwords")));
-  }
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Password Generator"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+      );
 }
 
 class NamePage extends StatefulWidget {
@@ -114,9 +120,17 @@ class NamePage extends StatefulWidget {
 
 class _NamePageState extends State<NamePage> {
   @override
-  Widget build(BuildContext context) {
-    return Container(child: Center(child: Text("Names"),),);
-  }
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Password Generator"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+      );
 }
 
 class NicknamePage extends StatefulWidget {
@@ -128,11 +142,15 @@ class NicknamePage extends StatefulWidget {
 
 class _NicknamePageState extends State<NicknamePage> {
   @override
-  Widget build(BuildContext context) {
-    return Container(child: Center(child: Text("Nicknames"),),);
-  }
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Password Generator"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+      );
 }
-
-
-
-
