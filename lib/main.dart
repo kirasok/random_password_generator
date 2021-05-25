@@ -390,6 +390,7 @@ class _PasswordPageState extends State<PasswordPage> {
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16.0,
+                    fontFamily: 'RobotoMono',
                     fontFeatures: [FontFeature.tabularFigures()],
                   )),
             ),
