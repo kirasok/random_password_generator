@@ -253,6 +253,8 @@ class _PasswordPageState extends State<PasswordPage> {
       "}",
       "~",
     ];
+    // We do not add ambiguous because we already use them in symbols
+    // The ambiguous array necessary only to remove them
     var resultChars =
         lowercase + uppercase + numbers + symbols + similar;
     if (!isIncludeLowercase)
