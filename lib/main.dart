@@ -35,7 +35,10 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Random Values Generator"),
         ),
-        body: ValuesList(_items),
+        body: DefaultTextStyle(
+          style: TextStyle(),
+          child: ValuesList(_items),
+        ),
       ),
     );
   }
@@ -99,7 +102,7 @@ class PasswordPage extends StatefulWidget {
 }
 
 class _PasswordPageState extends State<PasswordPage> {
-  double _currentPasswordLength = 8;
+  double _currentPasswordLength = 4;
   bool isIncludeLowercase = true;
   bool isIncludeUppercase = true;
   bool isIncludeNumbers = true;
@@ -117,16 +120,18 @@ class _PasswordPageState extends State<PasswordPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text("Password Generator"),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
+      appBar: AppBar(
+        title: Text("Password Generator"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-        body: ListView(
+      ),
+      body: DefaultTextStyle(
+        style: TextStyle(),
+        child: ListView(
           children: [
             // TODO: make slider be log2
             Slider(
@@ -195,16 +200,20 @@ class _PasswordPageState extends State<PasswordPage> {
                 });
               },
             ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  password = _generatePassword();
-                });
-              },
-              style: ElevatedButton.styleFrom(textStyle: DefaultTextStyle.of(context).style.apply(
-                fontSizeFactor: 0.5,
-              )),
-              child: Text("Generate Password"),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    password = _generatePassword();
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
+                child: Text("Generate Password"),
+              ),
             ),
             Container(
               margin: const EdgeInsets.all(16),
@@ -212,14 +221,15 @@ class _PasswordPageState extends State<PasswordPage> {
               child: Text(password,
                   softWrap: true,
                   textAlign: TextAlign.justify,
-                  style: DefaultTextStyle.of(context).style.apply(
-                      color: Colors.black,
-                      fontSizeFactor: 0.35,
-                      fontFeatures: [FontFeature.tabularFigures()])),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16.0,
+                    fontFeatures: [FontFeature.tabularFigures()],
+                  )),
             ),
           ],
         ),
-      );
+      ));
 }
 
 class NamePage extends StatefulWidget {
