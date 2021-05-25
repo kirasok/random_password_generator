@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -113,9 +114,172 @@ class _PasswordPageState extends State<PasswordPage> {
   Color colorOfPasswordBackground = Colors.transparent;
 
   String _generatePassword() {
-    // TODO: generate password
-    colorOfPasswordBackground = Colors.grey.shade300;
-    return "a" * _currentPasswordLength.toInt();
+    // Arrays with characters
+    // I swear I didn't write it myself
+    var lowercase = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ];
+    var uppercase = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+    ];
+    var numbers = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+    ];
+    var symbols = [
+      "!",
+      "#",
+      "\$",
+      "%",
+      "&",
+      "*",
+      "+",
+      "-",
+      "?",
+      "@",
+      "\"",
+      "'",
+      "(",
+      ")",
+      ",",
+      ".",
+      "/",
+      ":",
+      ";",
+      "<",
+      "=",
+      ">",
+      "[",
+      "\\",
+      "]",
+      "^",
+      "_",
+      "`",
+      "{",
+      "|",
+      "}",
+      "~",
+    ];
+    var similar = [
+      "1",
+      "i",
+      "I",
+      "l",
+      "L",
+      "|",
+      "o",
+      "O",
+      "0",
+    ];
+    var ambiguous = [
+      "\"",
+      "'",
+      "(",
+      ")",
+      ",",
+      ".",
+      "/",
+      ":",
+      ";",
+      "<",
+      "=",
+      ">",
+      "[",
+      "\\",
+      "]",
+      "^",
+      "_",
+      "`",
+      "{",
+      "|",
+      "}",
+      "~",
+    ];
+    var resultChars =
+        lowercase + uppercase + numbers + symbols + similar;
+    if (!isIncludeLowercase)
+      resultChars.removeWhere((element) => lowercase.contains(element));
+    if (!isIncludeUppercase)
+      resultChars.removeWhere((element) => uppercase.contains(element));
+    if (!isIncludeNumbers)
+      resultChars.removeWhere((element) => numbers.contains(element));
+    if (!isIncludeSymbols)
+      resultChars.removeWhere((element) => symbols.contains(element));
+    if (isExcludeSimilar)
+      resultChars.removeWhere((element) => similar.contains(element));
+    if (isExcludeAmbiguous)
+      resultChars.removeWhere((element) => ambiguous.contains(element));
+
+    if (resultChars.isNotEmpty) {
+      colorOfPasswordBackground = Colors.grey.shade300;
+      String result = "";
+      var random = Random.secure();
+      for (var a = 0; a < _currentPasswordLength; a++) {
+        result += resultChars[random.nextInt(resultChars.length)];
+      }
+      return result;
+    } else {
+      colorOfPasswordBackground = Colors.white;
+      return "";
+    }
   }
 
   @override
