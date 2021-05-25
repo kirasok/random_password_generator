@@ -72,3 +72,48 @@ class _ValuesListState extends State<ValuesList> {
   }
 }
 
+class PasswordPage extends StatefulWidget {
+  const PasswordPage({Key key}) : super(key: key);
+
+  @override
+  _PasswordPageState createState() => _PasswordPageState();
+}
+
+class _PasswordPageState extends State<PasswordPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(child: Center(child: Text("Passwords")));
+  }
+}
+
+class NamePage extends StatefulWidget {
+  const NamePage({Key key}) : super(key: key);
+
+  @override
+  _NamePageState createState() => _NamePageState();
+}
+
+class _NamePageState extends State<NamePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(child: Center(child: Text("Names"),),);
+  }
+}
+
+class NicknamePage extends StatefulWidget {
+  const NicknamePage({Key key}) : super(key: key);
+
+  @override
+  _NicknamePageState createState() => _NicknamePageState();
+}
+
+class _NicknamePageState extends State<NicknamePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(child: Center(child: Text("Nicknames"),),);
+  }
+}
+
+
+
+
