@@ -35,6 +35,12 @@ class MyApp extends StatelessWidget {
         ),
         body: ValuesList(_items),
       ),
+      routes: {
+        '/main': (context) => ValuesList(_items),
+        '/password': (context) => PasswordPage(),
+        '/name': (context) => NamePage(),
+        '/nickname': (context) => NicknamePage(),
+      },
     );
   }
 }
