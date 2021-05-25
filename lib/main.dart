@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 void main() {
   var items = [
-    Item("Password", Icon(Icons.vpn_key)),
-    Item("Name", Icon(Icons.person)),
-    Item("Nickname", Icon(Icons.error)), // TODO: add icon
+    Item("Password", Icons.vpn_key),
+    Item("Name", Icons.person),
+    Item("Nickname", Icons.error), // TODO: add icon
   ];
   items.sort((a, b) => a.title.compareTo(b.title));
 
@@ -13,7 +13,7 @@ void main() {
 
 class Item {
   String title;
-  Icon icon;
+  IconData icon;
 
   Item(this.title, this.icon);
 }
@@ -33,8 +33,42 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Random Values Generator"),
         ),
-        body: Center(child: Text("Hello, my first myself developed app")),
+        body: ValuesList(items),
       ),
     );
   }
 }
+
+class ValuesList extends StatefulWidget {
+  final List items;
+
+  const ValuesList(this.items, {Key key}) : super(key: key);
+
+  @override
+  _ValuesListState createState() => _ValuesListState(items);
+}
+
+class _ValuesListState extends State<ValuesList> {
+
+  final List items;
+  _ValuesListState(this.items);
+
+  Widget buildRow(Item item) => ListTile(
+    title: Text(item.title),
+    trailing: Icon(item.icon),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.all(16.0),
+      itemCount: items.length + 2,
+      itemBuilder: (context, i) {
+        if (i.isOdd) return Divider();
+        final index = i ~/ 2;
+        return buildRow(items[index]);
+      },
+    );
+  }
+}
+
