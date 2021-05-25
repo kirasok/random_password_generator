@@ -122,7 +122,7 @@ class _NamePageState extends State<NamePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Password Generator"),
+          title: Text("Name Generator"),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -144,7 +144,7 @@ class _NicknamePageState extends State<NicknamePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Password Generator"),
+          title: Text("Nickname Generator"),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
