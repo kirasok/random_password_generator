@@ -405,7 +405,17 @@ class _PasswordPageState extends State<PasswordPage> {
             height: 48,
             fit: BoxFit.cover,
           ),
-          onPressed: () => Clipboard.setData(ClipboardData(text: password)),
+          onPressed: () {
+            if (password.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('Password has copied to clipboard'),
+                ),
+              );
+
+              Clipboard.setData(ClipboardData(text: password));
+            }
+          },
         ),
       );
 }
