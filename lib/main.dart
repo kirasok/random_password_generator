@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   var _items = [
@@ -255,8 +256,7 @@ class _PasswordPageState extends State<PasswordPage> {
     ];
     // We do not add ambiguous because we already use them in symbols
     // The ambiguous array necessary only to remove them
-    var resultChars =
-        lowercase + uppercase + numbers + symbols + similar;
+    var resultChars = lowercase + uppercase + numbers + symbols + similar;
     if (!isIncludeLowercase)
       resultChars.removeWhere((element) => lowercase.contains(element));
     if (!isIncludeUppercase)
@@ -286,117 +286,122 @@ class _PasswordPageState extends State<PasswordPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: Text("Password Generator"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        appBar: AppBar(
+          title: Text("Password Generator"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
         ),
-      ),
-      body: DefaultTextStyle(
-        style: TextStyle(),
-        child: ListView(
-          children: [
-            // TODO: make slider be log2
-            Slider(
-              value: _currentPasswordLength,
-              min: 4,
-              max: 256,
-              divisions: 252,
-              label: _currentPasswordLength.round().toString(),
-              onChanged: (double value) {
-                setState(() {
-                  _currentPasswordLength = value;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text("Include Lowercase Characters"),
-              value: isIncludeLowercase,
-              onChanged: (bool a) {
-                setState(() {
-                  isIncludeLowercase = a;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text("Include Uppercase Characters"),
-              value: isIncludeUppercase,
-              onChanged: (bool a) {
-                setState(() {
-                  isIncludeUppercase = a;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text("Include Numbers"),
-              value: isIncludeNumbers,
-              onChanged: (bool a) {
-                setState(() {
-                  isIncludeNumbers = a;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text("Include Symbols"),
-              value: isIncludeSymbols,
-              onChanged: (bool a) {
-                setState(() {
-                  isIncludeSymbols = a;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text("Exclude Similar Characters"),
-              value: isExcludeSimilar,
-              onChanged: (bool a) {
-                setState(() {
-                  isExcludeSimilar = a;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text("Exclude Ambiguous Characters"),
-              value: isExcludeAmbiguous,
-              onChanged: (bool a) {
-                setState(() {
-                  isExcludeAmbiguous = a;
-                });
-              },
-            ),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
+        body: DefaultTextStyle(
+          style: TextStyle(),
+          child: ListView(
+            children: [
+              // TODO: make slider be log2
+              Slider(
+                value: _currentPasswordLength,
+                min: 4,
+                max: 256,
+                divisions: 252,
+                label: _currentPasswordLength.round().toString(),
+                onChanged: (double value) {
                   setState(() {
-                    password = _generatePassword();
+                    _currentPasswordLength = value;
                   });
                 },
-                style: ElevatedButton.styleFrom(
-                    textStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                )),
-                child: Text("Generate Password"),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(16),
-              color: colorOfPasswordBackground,
-              child: Text(password,
-                  softWrap: true,
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.0,
-                    fontFamily: 'RobotoMono',
-                    fontFeatures: [FontFeature.tabularFigures()],
+              CheckboxListTile(
+                title: Text("Include Lowercase Characters"),
+                value: isIncludeLowercase,
+                onChanged: (bool a) {
+                  setState(() {
+                    isIncludeLowercase = a;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Include Uppercase Characters"),
+                value: isIncludeUppercase,
+                onChanged: (bool a) {
+                  setState(() {
+                    isIncludeUppercase = a;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Include Numbers"),
+                value: isIncludeNumbers,
+                onChanged: (bool a) {
+                  setState(() {
+                    isIncludeNumbers = a;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Include Symbols"),
+                value: isIncludeSymbols,
+                onChanged: (bool a) {
+                  setState(() {
+                    isIncludeSymbols = a;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Exclude Similar Characters"),
+                value: isExcludeSimilar,
+                onChanged: (bool a) {
+                  setState(() {
+                    isExcludeSimilar = a;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Exclude Ambiguous Characters"),
+                value: isExcludeAmbiguous,
+                onChanged: (bool a) {
+                  setState(() {
+                    isExcludeAmbiguous = a;
+                  });
+                },
+              ),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      password = _generatePassword();
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   )),
-            ),
-          ],
+                  child: Text("Generate Password"),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(16),
+                color: colorOfPasswordBackground,
+                child: Text(password,
+                    softWrap: true,
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16.0,
+                      fontFamily: 'RobotoMono',
+                      fontFeatures: [FontFeature.tabularFigures()],
+                    )),
+              ),
+            ],
+          ),
         ),
-      ));
+        floatingActionButton: FloatingActionButton(
+          child: Image.asset("images/clipboard_arrow_down.xml"),
+          onPressed: () => Clipboard.setData(ClipboardData(text: password)),
+        ),
+      );
 }
 
 class NamePage extends StatefulWidget {
