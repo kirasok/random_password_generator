@@ -35,12 +35,6 @@ class MyApp extends StatelessWidget {
         ),
         body: ValuesList(_items),
       ),
-      routes: {
-        '/main': (context) => ValuesList(_items),
-        '/password': (context) => PasswordPage(),
-        '/name': (context) => NamePage(),
-        '/nickname': (context) => NicknamePage(),
-      },
     );
   }
 }
@@ -62,7 +56,26 @@ class _ValuesListState extends State<ValuesList> {
   Widget _buildRow(Item item) => ListTile(
     title: Text(item.title),
     trailing: Icon(item.icon),
+    onTap: () {
+      switch(item.title){
+        case "Password":
+          _navigateTo(PasswordPage());
+          break;
+        case "Name":
+          _navigateTo(NamePage());
+          break;
+        case "Nickname":
+          _navigateTo(NicknamePage());
+          break;
+      }
+    },
   );
+
+  void _navigateTo(Widget to) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => to
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
