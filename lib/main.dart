@@ -10,15 +10,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Random Password Generator',
-      theme: ThemeData(
-          primarySwatch: Colors.lightBlue, accentColor: Colors.amberAccent),
-      home: PasswordPage()
-    );
+        title: 'Random Password Generator',
+        theme: ThemeData(
+            primarySwatch: Colors.lightBlue, accentColor: Colors.amberAccent),
+        home: PasswordPage());
   }
 }
 
@@ -212,8 +210,7 @@ class _PasswordPageState extends State<PasswordPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text("Random Password Generator"),
         ),
@@ -309,7 +306,7 @@ class _PasswordPageState extends State<PasswordPage> {
                         message = "Password is impossible to hack";
                       else
                         message =
-                        "Some error occurred when we estimated password strength. Please, leave issue on our GitHub";
+                            "Some error occurred when we estimated password strength. Please, leave issue on our GitHub";
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(message),
@@ -319,9 +316,9 @@ class _PasswordPageState extends State<PasswordPage> {
                   },
                   style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )),
                   child: Text("Generate Password"),
                 ),
               ),
@@ -342,13 +339,7 @@ class _PasswordPageState extends State<PasswordPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          // TODO: fix no image
-          child: Image.asset(
-            "images/clipboard_arrow_down.png",
-            width: 48,
-            height: 48,
-            fit: BoxFit.cover,
-          ),
+          child: Icon(Icons.save),
           onPressed: () {
             if (password.isNotEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
