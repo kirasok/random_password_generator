@@ -1,6 +1,6 @@
-# random_values_generator
+# random_password_generator
 
-A Flutter app that generator different random values
+A Flutter app that generator different passwords
 
 ## Getting Started
 

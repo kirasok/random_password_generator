@@ -1,11 +1,11 @@
 {
-    "name": "random_values_generator",
-    "short_name": "random_values_generator",
+    "name": "random_password_generator",
+    "short_name": "password_generator",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A Flutter app that generator different random values",
+    "description": "A Flutter app that generator different passwords",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
