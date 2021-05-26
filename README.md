@@ -20,17 +20,12 @@ Can estimate password strength
 
 ## Screenshots
 
-![Main screen](./github/static/images/1.jpg)
+![Main screen](./github/static/images/1.jpg =270x)
 
-![Password strength](./github/static/images/2.jpg)
+![Password strength](./github/static/images/2.jpg =270x)
 
-![Copy to clipboard](./github/static/images/3.jpg)
+![Copy to clipboard](./github/static/images/3.jpg =270x)
 
 ## License
 
->                     GNU GENERAL PUBLIC LICENSE
->                        Version 3, 29 June 2007
->  
->   Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
->   Everyone is permitted to copy and distribute verbatim copies
->   of this license document, but changing it is not allowed.
+Source code available under [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses).
