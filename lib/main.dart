@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:password_strength/password_strength.dart';
 
 void main() {
   var _items = [
@@ -60,7 +61,8 @@ class _ValuesListState extends State<ValuesList> {
 
   _ValuesListState(this._items);
 
-  Widget _buildRow(Item item) => ListTile(
+  Widget _buildRow(Item item) =>
+      ListTile(
         title: Text(item.title),
         trailing: Icon(item.icon),
         onTap: () {
@@ -105,6 +107,7 @@ class PasswordPage extends StatefulWidget {
 
 class _PasswordPageState extends State<PasswordPage> {
   double _currentPasswordLength = 4;
+  double strength;
   bool isIncludeLowercase = true;
   bool isIncludeUppercase = true;
   bool isIncludeNumbers = true;
@@ -285,7 +288,8 @@ class _PasswordPageState extends State<PasswordPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) =>
+      Scaffold(
         appBar: AppBar(
           title: Text("Password Generator"),
           leading: IconButton(
@@ -371,13 +375,35 @@ class _PasswordPageState extends State<PasswordPage> {
                   onPressed: () {
                     setState(() {
                       password = _generatePassword();
+                      strength = estimatePasswordStrength(password);
+                      String message;
+                      if (strength < 0.2)
+                        message = "Password is extremely weak";
+                      else if (strength < 0.4)
+                        message = "Password is weak";
+                      else if (strength < 0.6)
+                        message = "Password is normal";
+                      else if (strength < 0.8)
+                        message = "Password is strong";
+                      else if (strength < 1.0)
+                        message = "Password is especially strong";
+                      else if (strength == 1.0)
+                        message = "Password is impossible to hack";
+                      else
+                        message =
+                        "Some error occurred when we estimated password strength. Please, leave issue on our GitHub";
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(message),
+                        ),
+                      );
                     });
                   },
                   style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  )),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
                   child: Text("Generate Password"),
                 ),
               ),
@@ -429,7 +455,8 @@ class NamePage extends StatefulWidget {
 
 class _NamePageState extends State<NamePage> {
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) =>
+      Scaffold(
         appBar: AppBar(
           title: Text("Name Generator"),
           leading: IconButton(
@@ -451,7 +478,8 @@ class NicknamePage extends StatefulWidget {
 
 class _NicknamePageState extends State<NicknamePage> {
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) =>
+      Scaffold(
         appBar: AppBar(
           title: Text("Nickname Generator"),
           leading: IconButton(
