@@ -1,5 +1,5 @@
-name: random_values_generator
-description: A Flutter app that generator different random values
+name: random_password_generator
+description: A Flutter app that generate passwords
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.

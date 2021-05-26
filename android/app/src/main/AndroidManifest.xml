@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.kirillmokretsov.random_values_generator">
+    package="io.github.kirillmokretsov.random_password_generator">
    <application
-        android:label="random_values_generator"
+        android:label="random_password_generator"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
