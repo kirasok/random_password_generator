@@ -20,11 +20,11 @@ Can estimate password strength
 
 ## Screenshots
 
-![Main screen](./github/static/images/1.jpg =270x)
+<img src="./github/static/images/1.jpg" alt="drawing" width="270"/>
 
-![Password strength](./github/static/images/2.jpg =270x)
+<img src="./github/static/images/2.jpg" alt="drawing" width="270"/>
 
-![Copy to clipboard](./github/static/images/3.jpg =270x)
+<img src="./github/static/images/3.jpg" alt="drawing" width="270"/>
 
 ## License
 
