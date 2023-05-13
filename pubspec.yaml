@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   password_strength: ^0.2.0
   flutter_xlider: ^3.4.0
+  dynamic_color: ^1.6.3
 
 dev_dependencies:
   flutter_test:
