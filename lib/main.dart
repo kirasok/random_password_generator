@@ -1,24 +1,41 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:password_strength/password_strength.dart';
+import 'package:random_password_generator/ui/theme/colors.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  ColorScheme _staticColorscheme(Brightness brightness) =>
+      SeedColorScheme.fromSeeds(
+          primaryKey: primaryColorSeed,
+          secondaryKey: secondaryColorSeed,
+          tertiaryKey: tertiaryColorSeed,
+          brightness: brightness,
+          tones: FlexTones.vivid(brightness));
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Random Password Generator',
-        theme: ThemeData(
-            primarySwatch: Colors.lightBlue, accentColor: Colors.amberAccent),
-        home: PasswordPage());
-  }
+  Widget build(BuildContext context) => DynamicColorBuilder(
+        builder: (lightDynamic, darkDynamic) => MaterialApp(
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightDynamic ?? _staticColorscheme(Brightness.light),
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: darkDynamic ?? _staticColorscheme(Brightness.dark),
+          ),
+          home: PasswordPage(),
+        ),
+      );
 }
 
 class PasswordPage extends StatefulWidget {
@@ -242,9 +259,8 @@ class _PasswordPageState extends State<PasswordPage> {
                     textStyle:
                         TextStyle(fontSize: 16, color: Colors.grey.shade700),
                     alwaysShowTooltip: true,
-                    positionOffset: FlutterSliderTooltipPositionOffset(
-                        top: -30
-                    ),
+                    positionOffset:
+                        FlutterSliderTooltipPositionOffset(top: -30),
                   ),
                   handlerAnimation: FlutterSliderHandlerAnimation(
                       curve: Curves.elasticOut,
