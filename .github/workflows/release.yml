@@ -23,7 +23,7 @@ jobs:
       - name: Create version.txt with tagName
         run: echo $GIT_TAG_NAME > version.txt
       - name: Upload version.txt
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: gitversion
           path: version.txt
@@ -51,7 +51,7 @@ jobs:
         id: android_keystore
         uses: timheuer/base64-to-file@v1.2.3
         with:
-          fileName: upload-keystore.jks
+          fileName: keystore.jks
           encodedString: ${{ secrets.KEYSTORE_BASE64 }}
       - name: Create key.properties
         run: |
