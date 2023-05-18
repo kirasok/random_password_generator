@@ -20,7 +20,7 @@ jobs:
           tagRegex: 'v([0-9]+.[0-9]+.[0-9]+\+[0-9]+)' # Optional. Returns specified group text as tag name. Full tag string is returned if regex is not defined.
           tagRegexGroup: 1 # Optional. Default is 1.
       - name: Create version.txt with tagName
-        run: echo ${{ $GIT_TAG_NAME  }} > version.txt
+        run: echo $GIT_TAG_NAME > version.txt
       - name: Upload version.txt
         uses: actions/upload-artifact@v2
         with:
