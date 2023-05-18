@@ -74,11 +74,6 @@ class _PasswordPageState extends State<PasswordPage> {
                           );
                         });
                     },
-                    style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    )),
                     child: Text("Generate Password"),
                   ),
                 ),
