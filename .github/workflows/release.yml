@@ -66,7 +66,7 @@ jobs:
       - name: Update version in YAML
         run: |
           dart pub global activate cider
-          dart pub global run cider version ${{env.version}}+${{github.run)number}}
+          dart pub global run cider version ${{env.version}}+${{github.run_number}}
 
       - name: Get dependencies
         run: flutter pub get
