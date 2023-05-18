@@ -24,9 +24,6 @@ jobs:
       - name: get previous version
         run: echo "prev=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))" >> $GITHUB_ENV
 
-      - name: Update version in YAML
-        run: sed -i 's/99.99.99+99/${{env.version}}+${{ github.run_number }}/g' pubspec.yaml
-
       - name: Download Android keystore
         id: android_keystore
         uses: timheuer/base64-to-file@v1.2.3
@@ -65,6 +62,11 @@ jobs:
         with:
           name: changelog
           path: CHANGELOG.md
+
+      - name: Update version in YAML
+        run: |
+          dart pub global activate cider
+          dart pub global run cider version ${{env.version}}+${{github.run)number}}
 
       - name: Get dependencies
         run: flutter pub get
