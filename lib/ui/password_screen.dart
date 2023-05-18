@@ -88,11 +88,12 @@ class _PasswordPageState extends State<PasswordPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(passwordState.password,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16.0,
-                                fontFamily: 'RobotoMono',
-                              )),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    fontFamily: 'RobotoMono',
+                                  )),
                         ),
                       )
                     : Container(),
