@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - "v*.*.*"
-    branches: ["master"]
 
   workflow_dispatch:
 
@@ -31,25 +30,8 @@ jobs:
       - name: Start Web Release Build
         run: flutter build web --release --web-renderer auto --base-href /${{ github.event.repository.name }}/
 
-      - name: Upload Web Build Files
-        uses: actions/upload-artifact@v3
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: web-release
-          path: ./build/web
-
-  deploy:
-    name: Deploy Web Build
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download Web Release
-        uses: actions/download-artifact@v3
-        with:
-          name: web-release
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          branch: gh-pages # The branch the action should deploy to.
+          folder: ./build/web # The folder the action should deploy.
