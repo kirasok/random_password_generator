@@ -30,6 +30,8 @@ jobs:
       - name: Start Web Release Build
         run: flutter build web --release --web-renderer auto --base-href /${{ github.event.repository.name }}/
 
+      - run: echo ${{ github.event.repository.name }}
+
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
