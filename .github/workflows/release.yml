@@ -21,7 +21,7 @@ jobs:
         run: echo "prev=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))" >> $GITHUB_ENV
 
       - name: Update version in YAML
-        run: sed -i 's/99.99.99+99/${{version}}+${{ github.run_number }}/g' pubspec.yaml
+        run: sed -i 's/99.99.99+99/${{env.version}}+${{ github.run_number }}/g' pubspec.yaml
 
       - name: Download Android keystore
         id: android_keystore
@@ -54,7 +54,7 @@ jobs:
       - name: generate changelog
         run: |
           dart pub global activate changelog_cli
-          dart pub global run changelog_cli generate -P markdown -s ${{prev}} -e ${{version}} > CHANGELOG.md
+          dart pub global run changelog_cli generate -P markdown -s ${{env.prev}} -e ${{env.version}} > CHANGELOG.md
 
       - name: upload changelog
         uses: actions/upload-artifact@v3
