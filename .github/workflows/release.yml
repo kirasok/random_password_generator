@@ -14,6 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Hack around https://github.com/actions/checkout/issues/290
+        run: |
+          git fetch --tags --force
+
       - name: get version
         run: echo "version=$(git describe --tags)" >> $GITHUB_ENV
 
