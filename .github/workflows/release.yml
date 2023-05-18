@@ -17,7 +17,7 @@ jobs:
       - uses: olegtarasov/get-tag@v2.1.2 # that generate $GIT_TAG_NAME env
         id: tagName
         with:
-          tagRegex: 'v([0-9]+.[0-9]+.[0-9]+\+[0-9]+)' # Optional. Returns specified group text as tag name. Full tag string is returned if regex is not defined.
+          tagRegex: "v[0-9]+.[0-9]+.[0-9]+" # Optional. Returns specified group text as tag name. Full tag string is returned if regex is not defined.
           tagRegexGroup: 1 # Optional. Default is 1.
       - run: echo $GIT_TAG_NAME
       - name: Create version.txt with tagName
