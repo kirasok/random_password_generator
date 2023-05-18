@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - "v*.*.*"
-    branches: ["master"]
 
   workflow_dispatch:
 
@@ -56,12 +55,11 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE_BASE64 }}
       - name: Create key.properties
         shell: bash
-        run: |
-          mkdir -p android
-          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
-          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+        run: mkdir -p android
+      - run: echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+      - run: echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/key.properties
+      - run: echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+      - run: echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
 
       - uses: actions/setup-java@v3
         with:
