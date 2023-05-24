@@ -25,9 +25,10 @@ class PasswordGenerated extends PasswordState {
       return "Some error occurred when we estimated password strength. Please, leave issue on our GitHub";
   }
 
+  void copy() => Clipboard.setData(ClipboardData(text: password));
+
   PasswordGenerated(this.password) {
     strength = estimatePasswordStrength(password);
-    Clipboard.setData(ClipboardData(text: password));
   }
 }
 
