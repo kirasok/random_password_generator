@@ -1,6 +1,6 @@
 # [Random Password Generator](https://kirasok.github.io/random_password_generator)
 
-A Flutter app that generate different passwords
+A Flutter app that generates different passwords
 
 ## Functions
 
